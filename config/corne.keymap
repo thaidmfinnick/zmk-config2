@@ -9,29 +9,14 @@
 
 / {
         behaviors {
-                osl1: osl_layer_1 {
+                // Hold-tap behavior: tap = one-shot layer (sl), hold = momentary layer (mo)
+                ht_layer: hold_tap_layer {
                         compatible = "zmk,behavior-hold-tap";
-                        #binding-cells = <0>;
+                        #binding-cells = <2>;
                         flavor = "tap-preferred";
                         tapping-term-ms = <200>;
                         quick-tap-ms = <150>;
-                        bindings = <&sl 1>, <&mo 1>;
-                };
-                osl2: osl_layer_2 {
-                        compatible = "zmk,behavior-hold-tap";
-                        #binding-cells = <0>;
-                        flavor = "tap-preferred";
-                        tapping-term-ms = <200>;
-                        quick-tap-ms = <150>;
-                        bindings = <&sl 2>, <&mo 2>;
-                };
-                osl3: osl_layer_3 {
-                        compatible = "zmk,behavior-hold-tap";
-                        #binding-cells = <0>;
-                        flavor = "tap-preferred";
-                        tapping-term-ms = <200>;
-                        quick-tap-ms = <150>;
-                        bindings = <&sl 3>, <&mo 3>;
+                        bindings = <&mo>, <&sl>;
                 };
         };
         keymap {
@@ -45,10 +30,10 @@
 //                    | ALT | OSL1| SPC |   | GUI | SHFT | CTL |
 
                         bindings = <
-                                &kp TAB    &kp Q     &kp W     &kp E     &kp R     &kp T        &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
-                                &kp ESC    &kp A     &kp S     &kp D     &kp F     &kp G        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp SQT
-                                &osl2      &kp Z     &kp X     &kp C     &kp V     &kp B        &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RET
-                                                       &kp LALT &osl1     &kp SPACE              &kp RGUI  &kp RSHFT &kp RCTRL
+                                &kp TAB       &kp Q     &kp W     &kp E     &kp R     &kp T        &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
+                                &kp ESC       &kp A     &kp S     &kp D     &kp F     &kp G        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp SQT
+                                &ht_layer 2 2 &kp Z     &kp X     &kp C     &kp V     &kp B        &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RET
+                                                       &kp LALT &ht_layer 1 1 &kp SPACE           &kp RGUI  &kp RSHFT &kp RCTRL
                         >;
                 };
                 lower_layer {
@@ -60,10 +45,10 @@
 //                    | TRNS| #### | TRNS |   | TRNS| TRNS| TRNS|
 
                         bindings = <
-                                &trans     &kp GRAVE &none     &none     &none     &none        &none     &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT  &trans
-                                &trans     &kp N1    &kp N2    &kp N3    &kp N4    &kp N5       &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &trans
-                                &osl3      &kp BSLH  &none     &none     &none     &none        &none     &none     &trans    &trans    &trans    &trans
-                                                       &trans   &trans    &trans                &trans    &trans    &trans
+                                &trans        &kp GRAVE &none     &none     &none     &none        &none     &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT  &trans
+                                &trans        &kp N1    &kp N2    &kp N3    &kp N4    &kp N5       &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &trans
+                                &ht_layer 3 3 &kp BSLH  &none     &none     &none     &none        &none     &none     &trans    &trans    &trans    &trans
+                                                       &trans   &trans    &trans                  &trans    &trans    &trans
                         >;
                 };
                 raise_layer {
@@ -77,8 +62,8 @@
                         bindings = <
                                 &none      &none     &none     &none     &none     &none        &none     &none     &none     &none     &kp PG_UP &kp HOME
                                 &none      &none     &kp F5    &kp F6    &kp F7    &kp F8       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none     &kp END
-                                &trans     &none     &kp F9    &kp F10   &kp F11   &kp F12      &kp PG_DN &kp F1    &kp F2    &kp F3    &kp F4   &none
-                                                       &trans   &osl3     &trans                &trans    &trans    &trans
+                                &trans     &none     &kp F9    &kp F10   &kp F11   &kp F12      &kp PG_DN &kp F1    &kp F2    &kp F3    &kp F4    &none
+                                                       &trans   &ht_layer 3 3 &trans            &trans    &trans    &trans
                         >;
                 };
                 media_layer {
