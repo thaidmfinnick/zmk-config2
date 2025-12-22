@@ -9,6 +9,15 @@
 
 / {
         behaviors {
+                // Override sticky layer default timeout (wait indefinitely until key press)
+                /omit-if-no-ref/ sl: sticky_layer {
+                        compatible = "zmk,behavior-sticky-key";
+                        #binding-cells = <1>;
+                        bindings = <&mo>;
+                        release-after-ms = <5000>;  // 5 seconds timeout (increase if needed)
+                        quick-release;              // Release immediately after key press
+                };
+
                 // Hold-tap behavior: tap = one-shot layer (sl), hold = momentary layer (mo)
                 ht_layer: hold_tap_layer {
                         compatible = "zmk,behavior-hold-tap";
