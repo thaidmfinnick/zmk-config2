@@ -139,7 +139,7 @@
             >;
         };
 
-        lower_layer {
+        number_layer {
             label = "NUM";
 
             //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
@@ -160,27 +160,6 @@
             >;
         };
 
-        raise_layer {
-            label = "FN + NAV";
-
-            //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-            //│  BT CLR  │  BT 0    │  BT 1    │  BT 2    │  BT 3    │  BT 4    │   │          │          │          │          │  PG UP   │  HOME    │
-            //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│          │          │  F5      │  F6      │  F7      │  F8      │   │  ←       │  ↓       │  ↑       │  →       │          │  END     │
-            //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│  ▽       │          │  F9      │  F10     │  F11     │  F12     │   │  PG DN   │  F1      │  F2      │  F3      │  F4      │          │
-            //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
-            //                                 │  ▽       │  ▽       │  ▽       │   │  ▽ BSPC  │  OSL3    │  ▽ OSL2  │
-            //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-
-            bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none      &none          &none   &none      &kp PG_UP  &kp HOME
-&none       &none         &kp F5        &kp F6        &kp F7        &kp F8          &kp LEFT   &kp DOWN       &kp UP  &kp RIGHT  &none      &kp END
-&trans      &none         &kp F9        &kp F10       &kp F11       &kp F12         &kp PG_DN  &kp F1         &kp F2  &kp F3     &kp F4     &none
-                                        &trans        &trans        &trans          &trans     &ht_layer 3 3  &trans
-            >;
-        };
-
         symbol_layer {
             label = "SYMBOL";
 
@@ -195,10 +174,31 @@
             //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
 
             bindings = <
-&none  &kp EXCL  &kp AT     &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp ASTRK  &kp QMARK  &kp SQT   &none
-&none  &kp PLUS  &kp EQUAL  &kp LPAR   &kp RPAR  &kp DQT      &kp COLON  &kp RBKT   &kp LBKT   &kp RBRC   &kp LBRC  &none
-&none  &kp LT    &kp PIPE   &kp MINUS  &kp GT    &kp BSLH     &kp GRAVE  &kp UNDER  &kp FSLH   &kp TILDE  &kp SEMI  &none
-                            &none      &none     &none        &trans     &trans     &none
+&none  &kp EXCL  &kp AT     &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS       &kp ASTRK  &kp QMARK  &kp SQT   &none
+&none  &kp PLUS  &kp EQUAL  &kp LPAR   &kp RPAR  &kp DQT      &kp COLON  &kp RBKT       &kp LBKT   &kp RBRC   &kp LBRC  &none
+&none  &kp LT    &kp PIPE   &kp MINUS  &kp GT    &kp BSLH     &kp GRAVE  &kp UNDER      &kp FSLH   &kp TILDE  &kp SEMI  &none
+                            &none      &none     &none        &trans     &ht_layer 3 3  &trans
+            >;
+        };
+
+        fn_layer {
+            label = "FN + NAV";
+
+            //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+            //│  BT CLR  │  BT 0    │  BT 1    │  BT 2    │  BT 3    │  BT 4    │   │          │          │          │          │  PG UP   │  HOME    │
+            //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+            //│          │          │  F5      │  F6      │  F7      │  F8      │   │  ←       │  ↓       │  ↑       │  →       │          │  END     │
+            //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+            //│  ▽       │          │  F9      │  F10     │  F11     │  F12     │   │  PG DN   │  F1      │  F2      │  F3      │  F4      │          │
+            //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+            //                                 │  ▽       │  ▽       │  ▽       │   │  ▽ BSPC  │  OSL3    │  ▽ OSL2  │
+            //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+
+            bindings = <
+&none   &kp F1      &kp F2        &kp F3        &kp F4        &kp F5          &kp F6     &kp F7    &kp F8  &kp F9     &kp F10  &kp HOME
+&none   &kp F11     &kp F12       &none         &none         &none           &kp LEFT   &kp DOWN  &kp UP  &kp RIGHT  &none    &kp END
+&trans  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3    &kp PG_DN  &none     &none   &none      &none    &none
+                                  &trans        &trans        &trans          &trans     &none     &none
             >;
         };
     };
